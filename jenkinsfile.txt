@@ -1,0 +1,26 @@
+pipeline{
+    agent any
+    tools{
+        maven 'apache-maven-3.0.1'
+    }
+        stages{
+            stage ('mvn version') {
+                steps{
+                    sh 'mvn --version'
+                }
+            }
+            stage('pull code') {
+                steps{
+                    git 'https://github.com/vikrantinfostretch9/maven-hello-world.git'
+                }
+                
+            }
+            stage ('build job') {
+                steps{
+                    withEnv(["MVN_HOME=$mvnHome"])
+                }
+            }
+                
+        }
+    
+}
